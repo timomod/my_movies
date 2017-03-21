@@ -5,27 +5,124 @@
 require dirname(dirname(__FILE__)).'/inc/config.php';
 
 //Include other data
-$headerH1 = 'My Movies Add or Edit a Movie';
+$headerH1 = '';
 
+//GET Genres
 
-
-
-/*$sql = "
-
-SELECT *
-FROM session
-INNER JOIN location ON session.location_loc_id = location.loc_id
-INNER JOIN training ON session.training_tra_id = training.tra_id
-GROUP BY ses_id
-ORDER BY loc_name, ses_id
+$sql = "
+SELECT * 
+FROM  genres
 
 ";
 
 //execute the query and save it in a variable
-$sessions = $pdo->query($sql);
+$genres = $pdo->query($sql);
 
 //fetchall results - without numbered index
-$sessionsInfo = $sessions->fetchAll(PDO::FETCH_ASSOC);*/
+$genreList = $genres->fetchAll(PDO::FETCH_ASSOC);
+
+
+print_r($_POST);
+
+
+
+/***********************************************************/
+//Testing
+
+
+//WARNING variables
+$warningTitle = '';
+$warningFirstname = '';
+$warningDob = '';
+$warningEmail = '';
+$warningFriendliness = '';
+$warningSessions = '';
+
+
+
+
+//FILM VARIABLES
+
+$title = '';
+$genre =  '';
+$plot =  '';
+$relYear =  '';
+$relMonth = ''; 
+$relDay =  '';
+$release =  '';
+$runtime =  '';
+$director =  '';
+$actors =  ''; 
+$country =  '';
+$languages = ''; 
+$poster =  '';
+
+
+
+
+
+
+if(!empty($_POST)) {
+
+ 	//Form content for DB
+ 	$title = ucwords(strtolower($_POST['title']));
+ 	$genre = $_POST['genre'];
+ 	$plot = $_POST['plot'];
+ 	$relYear = $_POST['relYear'];
+ 	$relMonth = $_POST['relMonth'];
+ 	$relDay = $_POST['relDay'];
+ 	$release = "{$relYear}-{$relMonth}-{$relDay}";
+ 	$runtime = $_POST['runtime'];
+	$director =  $_POST['director'];
+	$actors =  $_POST['actors'];
+	$country = $_POST['country'];
+	$languages = $_POST['languages'];
+	$poster = $_POST['poster'];
+	$formOk = true;
+
+
+	//VERIFICATION
+	// verifications here
+
+
+
+
+
+	if ($formOk) {
+
+
+		//ADD to DB.
+		$sql = "
+		INSERT INTO films (
+		film_title, film_plot, film_release, film_runtime, film_director, film_actors, film_country, film_languages, film_poster) 
+
+		VALUES (:title, :plot, :release, :runtime, :director, :actors, :country, :languages, :poster)
+
+		";
+		
+
+		$filmData = $pdo->prepare($sql);
+
+			$filmData->bindValue(':title', $title);
+			$filmData->bindValue(':plot', $plot);
+			$filmData->bindValue(':release', $release);
+			$filmData->bindValue(':runtime', $runtime);
+			$filmData->bindValue(':director', $director);
+			$filmData->bindValue(':actors', $actors);
+			$filmData->bindValue(':country', $country);
+			$filmData->bindValue(':languages', $languages);
+			$filmData->bindValue(':poster', $poster);
+	
+
+		$filmData->execute();
+		
+
+
+		//exit;
+	}//if ($formOk)
+
+
+};//if(!empty($_POST))
 
 
 
@@ -33,5 +130,5 @@ $sessionsInfo = $sessions->fetchAll(PDO::FETCH_ASSOC);*/
 //Include the views
 
 include dirname(dirname(__FILE__)).'/view/header.php';
-include dirname(dirname(__FILE__)).'/view/add_film.php';
+include dirname(dirname(__FILE__)).'/view/add_edit.php';
 include dirname(dirname(__FILE__)).'/view/footer.php';
