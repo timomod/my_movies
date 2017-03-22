@@ -30,10 +30,13 @@ $(document).ready(function() {
     		if(data['Response']) {
     			console.log('Data is Okidoki!');
     			$("#movie_form #title").val(data['Title']);
-    			//$("#movie_form #genre").val(data['Title']);
+    			$("#genre").html('<strong>OMDb suggested genres :</strong> '+data['Genre']+'<br>');
     			$("#movie_form #plot").val(data['Plot']);
+    			// extraxt release year from string provided by OMDb
+    			var film_release = data['Released'];
+    			var film_year = film_release.substr(film_release.length - 4);
 
-    			$("#movie_form #release").val(data['Released']);
+    			$("#movie_form #release").val(film_year);
 
     			$("#movie_form #runtime").val(data['Runtime']);
     			$("#movie_form #director").val(data['Director']);
@@ -45,7 +48,7 @@ $(document).ready(function() {
     			$("#omdb_poster img").attr("src", data['Poster']);
     			$("#omdb_poster img").attr("width", '200px');
 
-    			$('#movie_form input[type="submit"]').val('UPDATE');
+    			$('#movie_form input[type="submit"]').val('ADD OMDb movie');
     			
     			
     			

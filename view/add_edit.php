@@ -28,7 +28,10 @@
 				<?php foreach ($genreList as  $genre) : ?>
 					<option value="<?= $genre['gen_id'] ?>"> <?= $genre['gen_name'] ?> </option>
 				<?php endforeach ; ?>
-			</select><br><span id="genre"></span>
+			</select>
+			<!-- display Suggested genres -->
+			<span id="genre"></span>
+			<br>
 
 			<!-- PLOT -->	
 			<textarea id="plot" class="form-control" name="plot" form="movie_form" placeholder="Movie plot/description" rows="5" ><?= $plot ?></textarea>
@@ -38,7 +41,7 @@
 			 		<div class="col-sm-12"><h4>Release Date:</h4></div>
 					
 					<!-- YEAR -->	
-					<div class="col-sm-2">
+					<div class="col-sm-6">
 						<select id="release" class="form-control" name="relYear" value="<?= $relYear ?>">
 							<option value="">--Year--</option>
 							<?php foreach (range(2017, 1900) as $year) : ?>
