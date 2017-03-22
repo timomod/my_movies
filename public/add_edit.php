@@ -22,7 +22,7 @@ $genres = $pdo->query($sql);
 $genreList = $genres->fetchAll(PDO::FETCH_ASSOC);
 
 
-//print_r($_POST);
+print_r($_POST);
 
 
 
@@ -57,6 +57,8 @@ $country =  '';
 $languages = ''; 
 $poster =  '';
 
+$submitButton = 'Submit';
+
 
 
 
@@ -76,6 +78,8 @@ if(!empty($_POST)) {
 	$languages = $_POST['languages'];
 	$poster = $_POST['poster'];
 	$formOk = true;
+
+	$submitButton = "Update";
 
 
 	//VERIFICATION

@@ -65,7 +65,7 @@
 			<!-- POSTER -->	
 			<input id="poster" class="form-control" type="text" name="poster" placeholder="Poster. Link to movie poster" value="<?= $poster ?>"><br>
 			<!-- SUBMIT -->
-			<input type="submit" class="btn btn-success btn-block"  value="Submit">	
+			<input type="submit" class="btn btn-success btn-block"  value="<?= $submitButton ?>">	
 		</form>
 	</div>
 	<!-- POSTER IMAGE-->
