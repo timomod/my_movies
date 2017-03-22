@@ -22,12 +22,12 @@ $genres = $pdo->query($sql);
 $genreList = $genres->fetchAll(PDO::FETCH_ASSOC);
 
 
-print_r($_POST);
+//print_r($_POST);
 
 
 
 /***********************************************************/
-//Testing
+//Content check
 
 
 //WARNING variables
@@ -68,10 +68,7 @@ if(!empty($_POST)) {
  	$title = ucwords(strtolower($_POST['title']));
  	$genre = $_POST['genre'];
  	$plot = $_POST['plot'];
- 	$relYear = $_POST['relYear'];
- 	$relMonth = $_POST['relMonth'];
- 	$relDay = $_POST['relDay'];
- 	$release = "{$relYear}-{$relMonth}-{$relDay}";
+ 	$release = $_POST['relYear'];
  	$runtime = $_POST['runtime'];
 	$director =  $_POST['director'];
 	$actors =  $_POST['actors'];
